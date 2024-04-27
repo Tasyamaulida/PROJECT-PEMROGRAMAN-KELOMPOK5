@@ -1,1 +1,48 @@
+#include <stdio.h>
+#include <string.h>
+#include <iostream>
+#include <stdlib.h>
+#include <conio.h>
+
+using namespace std;
+
+//membuat struktur
+struct tanggal {
+    int DD, MM, YYYY;
+}
+
+//terdapat objek pada tiap-tiap struktur
+struct tanggal brw, rtn, bts;
+
+int charjadiint (char dt[10], int jd){
+    jd=atoi(dt);
+    return(jd);
+} 
+
+int main (){
+    system ("cls");
+
+    char nama[20], dt[10], kode[10][10], jb[5][10], k[4],
+    daftar[5][100] = {"TIK","PemogramanDasar", "BasisDataDasar", "JaringanKomputerDasar", "BahasaIndonesia"},
+    judul[5][100] = {"Pengembangan IT", "Pengembangan Bisnis", "IT Pada Era GenZ", "Web programing", "artificial intelegen"};
+
+    int i, jd, a, b, c, d, e, jumlah[10], total [10];
+
+    system("color 9E");
+    printf("\n\t\t\t====================================================\n\n");
+printf("\n\t\t\t     SELAMAT DATANG DI PROGRAM SEDERHANA\n");
+printf("\n\t\t\t         S I S T E M     P E M I N J A M A N    B E R B S I S   K O P U T E R\n");
+printf("\n\t\t\t         Oleh Kelompok 5\n");
+ printf("\n\t\t\t====================================================\n\n");
+
+printf("\n\t\t\t Syarat Dan Ketentuan Peminjaman Buku:\n");
+printf("\n\t1. Mengisi Data Peminjaman Buku\n");
+printf("\n\t2. Apabila terlambat mengembalikan buku akan dikenakan denda RP 1000/hari\n");
+printf("\n\t3. Harap Menjaga buku Dengan baik\n");
+printf("\n\t4. Uang Tersebut Akan Di Lokasikan Untuk Membeli buku baru\n");
+
+printf("\n\t\t\t Nama Peminjam Buku : ");
+gets(nama) ;
+strupr(nama);
+system("cls");
 
