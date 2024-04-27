@@ -30,7 +30,7 @@ typedef struct {
     char tahun_terbit[MAX_TAHUN_TERBIT_LENGTH];
     char jumlah_buku_yang_tersedia[MAX_JUMLAH_BUKU_YANG_TERSEDIA_LENGTH];
     
-} Book;
+} buku;
 
 typedef struct {
     int id_buku;
