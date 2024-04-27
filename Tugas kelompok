@@ -36,5 +36,5 @@ typedef struct {
     int id_buku;
     int userId;
     time_t borrowDate;
-    time_t returnDate; // 0 if not returned yet
+    time_t returnDate; // 0  jika belum dikembalikan
 } Borrowing;
