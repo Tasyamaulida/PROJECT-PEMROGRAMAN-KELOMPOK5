@@ -1,0 +1,13 @@
+pengguna* membacaPenggunaUntukFile(const char* berekstensi.txt);
+void menulisPenggunaKepadaFile(const char* berekstensi.txt, pengguna* pengguna);
+int verifyLogin(const char* username, const char* password);
+void Tampilkan_Menu();
+void Tampilkan_buku(buku* buku, int id_buku, char judul, char penulis, char penerbit, char jumlah_halaman, char tahun_terbit);
+int Temukan_buku_melalui_Id_Buku(buku* buku, int id_buku);
+void Meminjam_Buku(buku* buku, int* id_buku, peminjam* peminjam, int* numpeminjam, int userId);
+void Pengembalian_Buku(buku* buku, int* id_buku, peminjam* peminjam, int* numpeminjam, int userId);
+void Simpan_data_Ke_File(buku* buku, int id_buku, peminjam* peminjam, int numpeminjam);
+buku* membacaBukuUntukFile(const char* berekstensi.txt, int* id_buku);
+void membacaBukuKepadaFile(const char* berekstensi.txt, buku* buku, int id_buku);
+pengguna* membacaPenggunaUntukFile(const char* berekstensi.txt, int* numpeminjam);
+void menulisPenggunaKepadaFile(const char* berekstensi.txt, pengguna* pengguna, int numpengguna);
