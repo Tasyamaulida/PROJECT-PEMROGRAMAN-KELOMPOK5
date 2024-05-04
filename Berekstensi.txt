@@ -3,7 +3,7 @@
 |1 |  1122 |   Dasar-Dasar Teknik Informatika    |      Made Budi     |      Erlangga    |     217      |     2017   |         100 buah        |
 |2 |  2233 |   Pengantar Tekologi Informasi      | Dr.Ir. Setyo Wibowo|    Gagas media   |     380      |     2020   |         89 buah         |
 |3 |  3322 | Metode Penelitian Teknik Informasi  |  Dr.Ir. Made Agus  | Mizan Publishing |     480      |     2016   |         96 buah         |
-|4 |  4455 | Kompoter Cerdas Untuk Mahasiswa IT  |    Muklis Butomo   |      Erlangga    |     578      |     2023   |         84 buah         |
+|4 |  4455 | Komputer Cerdas Untuk Mahasiswa IT  |    Muklis Butomo   |      Erlangga    |     578      |     2023   |         84 buah         |
 |5 |  5566 |    Jaringan Kompuer dan Internet    |    Aiden Laksana   |      Gramedia    |     109      |     2005   |         196 buah        |
 |6 |  7788 |    Algoraritma dan Pemograman C++   |   Faras jannatul   |  Bentang Pustaka |     759      |     2017   |         106 buah        |
 |7 |  8899 |     Keamanan dan sistem informasi   |   Sofia Nurjanna   |   Penerbit Indie |     447      |     2019   |         67 buah         |
