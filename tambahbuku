@@ -69,8 +69,26 @@ void tambah_buku(void) {
     getchar();
     system("cls");
 }
-
 int main() {
     tambah_buku();
+    
+    int exit = 0;
+
+    while (!exit) {
+        tambah_buku();
+
+        printf("\n\t\t\tApakah Anda ingin menambahkan buku lagi? (y/n): ");
+        char response;
+        scanf(" %c", &response);
+
+        if (response != 'y' && response != 'Y') {
+            exit = 1;
+        }
+
+        system("cls");
+    }
+
     return 0;
+}
+
 }
