@@ -1,0 +1,76 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_TITLE_LENGTH 100
+#define MAX_AUTHOR_LENGTH 100
+#define MAX_PUBLISHER_LENGTH 100
+
+//Struktur data untuk menyimpan informasi buku
+struct Book {
+    unsigned int id_buku;
+    char judul_buku[MAX_TITLE_LENGTH];
+    char penulis[MAX_AUTHOR_LENGTH];
+    char penerbit_buku[MAX_PUBLISHER_LENGTH];
+    unsigned int halaman;
+    unsigned int tahun_terbit;
+    unsigned int list_buku_yang_tersedia; // Menambahkan bidang ini
+};
+
+void tambah_buku(void) {
+    struct Book tambahBuku = {0}; // Inisialisasi struct
+    FILE *filePointer; // File pointer
+
+    //Membuka file untuk ditulis
+    filePointer = fopen("Berekstensi.txt", "a");
+    if (filePointer == NULL) {
+        printf("Error: Tidak dapat membuka atau membuat file Berekstensi.txt\n");
+        return;
+    }
+
+    system("cls");
+    printf("\n\t\t\t=======================================\n");
+    printf("\n\t\t\t          PROGRAM PERPUSTAKAAN         \n");
+    printf("\n\t\t\t=======================================\n");
+
+    //Meminta masukan data buku dari pengguna
+    printf("\n\t\t\tMasukkan detail buku di bawah ini...\n");
+    printf("\t\t\tID Buku     : ");
+    scanf("%u", &tambahBuku.id_buku);
+    printf("\t\t\tJudul Buku  : ");
+    fflush(stdin);
+    fgets(tambahBuku.judul_buku, sizeof(tambahBuku.judul_buku), stdin);
+    tambahBuku.judul_buku[strcspn(tambahBuku.judul_buku, "\n")] = '\0'; // Hapus karakter newline
+    printf("\t\t\tPenulis     : ");
+    fflush(stdin);
+    fgets(tambahBuku.penulis, sizeof(tambahBuku.penulis), stdin);
+    tambahBuku.penulis[strcspn(tambahBuku.penulis, "\n")] = '\0'; // Hapus karakter newline
+    printf("\t\t\tPenerbit    : ");
+    fflush(stdin);
+    fgets(tambahBuku.penerbit_buku, sizeof(tambahBuku.penerbit_buku), stdin);
+    tambahBuku.penerbit_buku[strcspn(tambahBuku.penerbit_buku, "\n")] = '\0'; // Hapus karakter newline
+    printf("\t\t\tHalaman     : ");
+    scanf("%u", &tambahBuku.halaman);
+    printf("\t\t\tTahun Terbit: ");
+    scanf("%u", &tambahBuku.tahun_terbit);
+    printf("\t\t\tJumlah Tersedia: ");
+    scanf("%u", &tambahBuku.list_buku_yang_tersedia);
+
+   //Menulis data buku ke dalam file dalam format teks sebagai tabel
+    fprintf(filePointer, "| %-7u | %-40s | %-20s | %-15s | %-14u | %-12u | %-26u |\n", tambahBuku.id_buku, tambahBuku.judul_buku,
+            tambahBuku.penulis, tambahBuku.penerbit_buku, tambahBuku.halaman, tambahBuku.tahun_terbit,
+            tambahBuku.list_buku_yang_tersedia);
+    
+    fclose(filePointer);
+
+    printf("\n\t\t\tBuku sudah ditambahkan ke database\n");
+    printf("\n\t\t\tTekan tombol enter untuk kembali ke menu utama");
+    fflush(stdin);
+    getchar();
+    system("cls");
+}
+
+int main() {
+    tambah_buku();
+    return 0;
+}
