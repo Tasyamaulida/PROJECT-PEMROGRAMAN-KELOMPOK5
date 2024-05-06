@@ -192,64 +192,77 @@ void tampilHalamanAdmin() {
 }
 
 void tambah_buku(void) {
-  Buku tambahBuku = {
-    0
-  }; //Memanggil ke struct ke fungsi
-  FILE * filePointer; //filepointer
-  filePointer = fopen("berekstensi.txt", "a+");
+    struct Book tambahBuku = {0}; // Inisialisasi struct
+    FILE *filePointer; // File pointer
+    bool isFirstBook = false;
+    char pilihan;
 
-  system("cls");
-  printf("\t\t\t===========================================================================");
-  printf("\n\t\t\t------------                                                   ------------ ");
-  printf("\n\t\t\t------------       | PROGRAM PERPUSTAKAAN KELOMPOK 5  |        ------------ ");
-  printf("\n\t\t\t------------                                                   ------------ ");
-  printf("\n\t\t\t=========================================================================== ");
-  printf("\n\t\t\t--------------------------------------------------------------------------- ");
-  printf("\n\t\t\t                         <<< Menu Tambah Buku >>>                           ");
-  printf("\n\t\t\t--------------------------------------------------------------------------- ");
+    //Membuka file untuk ditulis
+    filePointer = fopen("Berekstensi.txt", "a");
+    if (filePointer == NULL) {
+        printf("Error: Tidak dapat membuka atau membuat file Berekstensi.txt\n");
+        return;
+    }
 
-  //Fungsi nambahin buku
-  printf("\n\t\t\tMasukan detail buku dibawah...\n");
-  printf("\t\tid buku   :");
-  fflush(stdin);
-  scanf("%u", & tambahBuku.id_buku);
-  printf("\t\tJudul Buku   :");
-  fflush(stdin);
-  fgets(tambahBuku.judul_buku, MAKS_JUDUL_BUKU, stdin);
-  printf("\t\t\tNama Penulis:");
-  fflush(stdin);
-  fgets(tambahBuku.penulis, MAKS_NAMA_PENULIS, stdin);
-  printf("\t\t\tPenerbit Buku  :");
-  fflush(stdin);
-  fgets(tambahBuku.penerbit_buku, MAKS_PENERBIT, stdin);
-  printf("\t\t\tHalaman     :");
-  scanf("%u", & tambahBuku.jumlah_halaman);
-  printf("\t\tTahun Terbit     :");
-  scanf("%u", & tambahBuku.tahun_terbit);
-  printf("\t\t\tJumlah Yang Tersedia       :");
-  scanf("%f", & tambahBuku.list_buku_yang_tersedia);
-
-  //Write ke file
-  fwrite( & tambahBuku, sizeof(tambahBuku), 1, filePointer);
-  fclose(filePointer);
-  printf("\n\t\t\tBuku sudah ditambahkan ke database\n");
-  printf("\n\t\t\tTekan tombol enter untuk kembali ke menu utama");
-  fflush(stdin);
-  getchar();
-  system("cls");
+    //Mengecek apakah file kosong
+if (ftell(filePointer) == 0) {
+    isFirstBook = true;
+    fprintf(filePointer, "| %-7s | %-40s | %-20s | %-15s | %-14s | %-12s | %-26s |\n",
+            "ID BUKU", "JUDUL BUKU", "PENULIS", "PENERBIT", "JUMLAH HALAMAN", "TAHUN TERBIT", "JUMLAH BUKU YANG TERSEDIA");
+    fprintf(filePointer, "|%-9s|%-42s|%-22s|%-17s|%-16s|%-14s|%-28s|\n",
+            "---------", "----------------------------------------", "--------------------",
+            "---------------", "----------------", "--------------", "--------------------------");
 }
 
-void delete_buku(void) {
-  system("cls");
-  printf("\t\t\t===========================================================================");
-  printf("\n\t\t\t------------                                                   ------------ ");
-  printf("\n\t\t\t------------           | PROGRAM PERPUSTAKAAN KELOMPOK 5    |   ------------ ");
-  printf("\n\t\t\t------------                                                   ------------ ");
-  printf("\n\t\t\t=========================================================================== ");
-  printf("\n\t\t\t--------------------------------------------------------------------------- ");
-  printf("\n\t\t\t                          <<< Menu Hapus Buku >>>                           ");
-  printf("\n\t\t\t--------------------------------------------------------------------------- ");
+    do {
+        system("cls");
+        printf("\n\t\t\t============================================\n");
+        printf("\n\t\t\t          PROGRAM PERPUSTAKAAN KELOMPOK 5       \n");
+        printf("\n\t\t\t==============================================\n");
 
+        //Meminta masukan data buku dari pengguna
+        printf("\n\t\t\tMasukkan detail buku di bawah ini...\n");
+        printf("\t\t\tID BUKU        : ");
+        scanf("%u", &tambahBuku.id_buku);
+        printf("\t\t\tJUDUL BUKU     : ");
+        fflush(stdin);
+        fgets(tambahBuku.judul_buku, sizeof(tambahBuku.judul_buku), stdin);
+        tambahBuku.judul_buku[strcspn(tambahBuku.judul_buku, "\n")] = '\0'; //Hapus karakter newline
+        printf("\t\t\tPENULIS        : ");
+        fflush(stdin);
+        fgets(tambahBuku.penulis, sizeof(tambahBuku.penulis), stdin);
+        tambahBuku.penulis[strcspn(tambahBuku.penulis, "\n")] = '\0'; //Hapus karakter newline
+        printf("\t\t\tPENERBIT       : ");
+        fflush(stdin);
+        fgets(tambahBuku.penerbit_buku, sizeof(tambahBuku.penerbit_buku), stdin);
+        tambahBuku.penerbit_buku[strcspn(tambahBuku.penerbit_buku, "\n")] = '\0'; //Hapus karakter newline
+        printf("\t\t\tJUMLAH HALAMAN : ");
+        scanf("%u", &tambahBuku.halaman);
+        printf("\t\t\tTAHUN TERBIT   : ");
+        scanf("%u", &tambahBuku.tahun_terbit);
+        printf("\t\t\tJUMLAH BUKU YANG TERSEDIA : ");
+        scanf("%u", &tambahBuku.list_buku_yang_tersedia);
+
+        // Menulis data buku ke dalam file dalam format teks sebagai tabel
+        fprintf(filePointer, "| %-7u | %-40s | %-20s | %-15s | %-14u | %-12u | %-26u |\n", tambahBuku.id_buku, tambahBuku.judul_buku,
+                tambahBuku.penulis, tambahBuku.penerbit_buku, tambahBuku.halaman, tambahBuku.tahun_terbit,
+                tambahBuku.list_buku_yang_tersedia);
+
+        printf("\n\t\t\tData buku berhasil ditambahkan.\n");
+        printf("\n\t\t\tApakah Anda ingin menambahkan data buku lagi? (y/n): ");
+        fflush(stdin);
+        scanf(" %c", &pilihan);
+    } while (pilihan == 'y' || pilihan == 'Y');
+
+    //Menutup file setelah selesai menulis
+    fclose(filePointer);
+
+    printf("\n\t\t\tTekan tombol enter untuk kembali ke menu utama");
+    fflush(stdin);
+    getchar();
+    system("cls");
+
+}
   //Fungsi delete buku
   int ketemu = 0, buku = 0;
   FILE * filePointer;
