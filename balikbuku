@@ -1,0 +1,100 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
+
+#define MAX_TITLE_LENGTH 100
+#define MAX_AUTHOR_LENGTH 100
+#define MAX_PUBLISHER_LENGTH 100
+
+// Struktur data untuk menyimpan informasi buku yang dikembalikan
+struct ReturnedBook {
+    unsigned int id_buku;
+    char judul_buku[MAX_TITLE_LENGTH];
+    char penulis[MAX_AUTHOR_LENGTH];
+    char penerbit_buku[MAX_PUBLISHER_LENGTH];
+    unsigned int halaman;
+    unsigned int tahun_terbit;
+    unsigned int jumlah_hari_terlambat;
+};
+
+void kembalikan_buku(void) {
+    struct ReturnedBook kembalikanBuku = {0}; // Inisialisasi struct
+    FILE *filePointer; // File pointer
+    bool isFirstBook = false;
+    bool isHeaderPrinted = false; // Variabel baru untuk melacak pencetakan header
+    char pilihan;
+
+    // Membuka file untuk ditulis
+    filePointer = fopen("PengembalianBuku.txt", "a");
+    if (filePointer == NULL) {
+        printf("Error: Tidak dapat membuka atau membuat file PengembalianBuku.txt\n");
+        return;
+    }
+
+    // Mengecek apakah file kosong
+    if (ftell(filePointer) == 0) {
+        isFirstBook = true;
+    }
+
+    // Mengecek apakah header sudah dicetak
+    if (!isHeaderPrinted) {
+        if (isFirstBook) {
+            fprintf(filePointer, "| %-7s | %-40s | %-20s | %-15s | %-14s | %-12s | %-20s |\n",
+                    "ID BUKU", "JUDUL BUKU", "PENULIS", "PENERBIT", "JUMLAH HALAMAN", "TAHUN TERBIT", "HARI TERLAMBAT");
+            fprintf(filePointer, "|%-9s|%-42s|%-22s|%-17s|%-16s|%-14s|%-22s|\n",
+                    "---------", "----------------------------------------", "--------------------",
+                    "---------------", "----------------", "--------------", "--------------------");
+            isFirstBook = false;
+        }
+        isHeaderPrinted = true;
+    }
+
+    do {
+        system("cls");
+        printf("\n\t\t\t=======================================\n");
+        printf("\n\t\t\t       PROGRAM PENGEMBALIAN BUKU       \n");
+        printf("\n\t\t\t=======================================\n");
+
+        // Meminta masukan data buku yang dikembalikan dari pengguna
+        printf("\n\t\t\tMasukkan detail buku yang dikembalikan...\n");
+        printf("\t\t\tID BUKU        : ");
+        scanf("%u", &kembalikanBuku.id_buku);
+        printf("\t\t\tJUDUL BUKU     : ");
+        fflush(stdin);
+        fgets(kembalikanBuku.judul_buku, sizeof(kembalikanBuku.judul_buku), stdin);
+        kembalikanBuku.judul_buku[strcspn(kembalikanBuku.judul_buku, "\n")] = '\0'; // Hapus karakter newline
+        printf("\t\t\tPENULIS        : ");
+        fflush(stdin);
+        fgets(kembalikanBuku.penulis, sizeof(kembalikanBuku.penulis), stdin);
+        kembalikanBuku.penulis[strcspn(kembalikanBuku.penulis, "\n")] = '\0'; // Hapus karakter newline
+        printf("\t\t\tPENERBIT       : ");
+        fflush(stdin);
+        fgets(kembalikanBuku.penerbit_buku, sizeof(kembalikanBuku.penerbit_buku), stdin);
+        kembalikanBuku.penerbit_buku[strcspn(kembalikanBuku.penerbit_buku, "\n")] = '\0'; // Hapus karakter newline
+        printf("\t\t\tJUMLAH HALAMAN : ");
+        scanf("%u", &kembalikanBuku.halaman);
+        printf("\t\t\tTAHUN TERBIT   : ");
+        scanf("%u", &kembalikanBuku.tahun_terbit);
+        printf("\t\t\tJUMLAH HARI TERLAMBAT : ");
+        scanf("%u", &kembalikanBuku.jumlah_hari_terlambat);
+
+        // Menulis data buku yang dikembalikan ke dalam file dalam format teks sebagai tabel
+        fprintf(filePointer, "| %-7u | %-40s | %-20s | %-15s | %-14u | %-12u | %-20u |\n",
+                kembalikanBuku.id_buku, kembalikanBuku.judul_buku, kembalikanBuku.penulis, kembalikanBuku.penerbit_buku,
+                kembalikanBuku.halaman, kembalikanBuku.tahun_terbit, kembalikanBuku.jumlah_hari_terlambat);
+
+        printf("\n\t\t\tBuku berhasil dikembalikan!\n\n");
+        printf("\n\t\t\tApakah Anda ingin mengembalikan buku lagi? (Y/N) : ");
+        fflush(stdin);
+        scanf(" %c", &pilihan);
+    } while (pilihan == 'Y' || pilihan == 'y');
+
+    // Menutup file setelah selesai menulis
+    fclose(filePointer);
+}
+
+int main(void) {
+    kembalikan_buku();
+    return 0;
+}
