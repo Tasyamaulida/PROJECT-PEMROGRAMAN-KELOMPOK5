@@ -1,23 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdbool.h>
-
-#define MAX_TITLE_LENGTH 100
-#define MAX_AUTHOR_LENGTH 100
-#define MAX_PUBLISHER_LENGTH 100
-
-//Struktur data untuk menyimpan informasi buku
-struct Book {
-    unsigned int id_buku;
-    char judul_buku[MAX_TITLE_LENGTH];
-    char penulis[MAX_AUTHOR_LENGTH];
-    char penerbit_buku[MAX_PUBLISHER_LENGTH];
-    unsigned int halaman;
-    unsigned int tahun_terbit;
-    unsigned int list_buku_yang_tersedia; // Menambahkan bidang ini
-};
-
 void tambah_buku(void) {
     struct Book tambahBuku = {0}; // Inisialisasi struct
     FILE *filePointer; // File pointer
@@ -34,8 +14,6 @@ void tambah_buku(void) {
     //Mengecek apakah file kosong
 if (ftell(filePointer) == 0) {
     isFirstBook = true;
-    fprintf(filePointer, "| %-7s | %-40s | %-20s | %-15s | %-14s | %-12s | %-26s |\n",
-            "ID BUKU", "JUDUL BUKU", "PENULIS", "PENERBIT", "JUMLAH HALAMAN", "TAHUN TERBIT", "JUMLAH BUKU YANG TERSEDIA");
     fprintf(filePointer, "|%-9s|%-42s|%-22s|%-17s|%-16s|%-14s|%-28s|\n",
             "---------", "----------------------------------------", "--------------------",
             "---------------", "----------------", "--------------", "--------------------------");
