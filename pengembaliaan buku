@@ -1,0 +1,76 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
+
+#define MAX_TITLE_LENGTH 100
+#define MAX_AUTHOR_LENGTH 100
+#define MAX_PUBLISHER_LENGTH 100
+
+// Struktur data untuk menyimpan informasi buku yang dipinjam
+struct BorrowedBook {
+    unsigned int id_buku;
+    char judul_buku[MAX_TITLE_LENGTH];
+    char penulis[MAX_AUTHOR_LENGTH];
+    char penerbit_buku[MAX_PUBLISHER_LENGTH];
+    unsigned int halaman;
+    unsigned int tahun_terbit;
+};
+
+void pinjam_buku(void) {
+    struct BorrowedBook pinjamBuku = {0}; // Inisialisasi struct
+    FILE *filePointer; // File pointer
+
+    // Membuka file untuk ditulis
+    filePointer = fopen("datauser.txt", "a");
+    if (filePointer == NULL) {
+        printf("Error: Tidak dapat membuka atau membuat file datauser   .txt\n");
+        return;
+    }
+
+    // Mengecek apakah file kosong
+    if (ftell(filePointer) == 0) {
+        // Mencetak header jika file kosong
+        fprintf(filePointer, "| %-7s | %-40s | %-20s | %-15s | %-14s | %-12s |\n",
+                "ID BUKU", "JUDUL BUKU", "PENULIS", "PENERBIT", "JUMLAH HALAMAN", "TAHUN TERBIT");
+        fprintf(filePointer, "|%-9s|%-42s|%-22s|%-17s|%-16s|%-14s|\n",
+                "---------", "----------------------------------------", "--------------------",
+                "---------------", "----------------", "--------------");
+    }
+
+    system("cls");
+    printf("\n\t\t\t=======================================\n");
+    printf("\n\t\t\t        PROGRAM PEMINJAMAN BUKU        \n");
+    printf("\n\t\t\t=======================================\n");
+
+    // Meminta masukan data buku yang dipinjam dari pengguna
+    printf("\n\t\t\tMasukkan detail buku yang dipinjam...\n");
+    printf("\t\t\tID BUKU        : ");
+    scanf("%u", &pinjamBuku.id_buku);
+    printf("\t\t\tJUDUL BUKU     : ");
+    fflush(stdin);
+    fgets(pinjamBuku.judul_buku, sizeof(pinjamBuku.judul_buku), stdin);
+    pinjamBuku.judul_buku[strcspn(pinjamBuku.judul_buku, "\n")] = '\0'; // Hapus karakter newline
+    printf("\t\t\tPENULIS        : ");
+    fflush(stdin);
+    fgets(pinjamBuku.penulis, sizeof(pinjamBuku.penulis), stdin);
+    pinjamBuku.penulis[strcspn(pinjamBuku.penulis, "\n")] = '\0'; // Hapus karakter newline
+    printf("\t\t\tPENERBIT       : ");
+    fflush(stdin);
+    fgets(pinjamBuku.penerbit_buku, sizeof(pinjamBuku.penerbit_buku), stdin);
+    pinjamBuku.penerbit_buku[strcspn(pinjamBuku.penerbit_buku, "\n")] = '\0'; // Hapus karakter newline
+    printf("\t\t\tJUMLAH HALAMAN : ");
+    scanf("%u", &pinjamBuku.halaman);
+    printf("\t\t\tTAHUN TERBIT   : ");
+    scanf("%u", &pinjamBuku.tahun_terbit);
+
+    // Menulis data buku yang dipinjam ke dalam file dalam format teks sebagai tabel
+    fprintf(filePointer, "| %-7u | %-40s | %-20s | %-15s | %-14u | %-12u |\n",
+            pinjamBuku.id_buku, pinjamBuku.judul_buku, pinjamBuku.penulis, pinjamBuku.penerbit_buku,
+            pinjamBuku.halaman, pinjamBuku.tahun_terbit);
+
+    printf("\n\t\t\tBuku berhasil dipinjam!\n\n");
+
+    // Menutup file
+    fclose(filePointer);
+}
