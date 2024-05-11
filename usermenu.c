@@ -1,48 +1,37 @@
 #include <stdio.h>
+#include "header.h"
 
-// Deklarasi Menu
-void showMenu(int isAdmin, int isUser);
-
-int main() {
-    int choice;
-    int isUser = 1; // 
-    int isAdmin = 1; // 
-
+void menuUser() {
+    int pilihan;
     do {
-        // Display menu untuk user
-        showMenu(isAdmin, isUser);
+        printf("Menu User\n");
+        printf("1. Lihat List Buku\n");
+        printf("2. Pinjam Buku\n");
+        printf("3. Kembalikan Buku\n");
+        printf("4. Cari Informasi Buku\n");
+        printf("5. Keluar\n");
+        printf("Pilihan Anda: ");
+        scanf("%d", &pilihan);
 
-       
-        printf("Enter your choice: ");
-        scanf("%d", &choice); 
-
-      
-        switch (choice) {
+        switch (pilihan) {
             case 1:
-                // Action for choice 1
+                listBukuTersedia();
                 break;
             case 2:
-                // Action for choice 2
+                pinjamBuku();
                 break;
-            // Add more cases as needed
+            case 3:
+                kembalikanBuku();
+                break;
+            case 4:
+                listBukuDipinjam();
+                break;
+            case 5:
+                printf("Terima kasih. Sampai jumpa!\n");
+                break;
             default:
-                printf("Pilihan salah. Masukkan pilihan yang benar.\n");
+                printf("Pilihan tidak valid. Silakan pilih kembali.\n");
+                break;
         }
-    } while (choice != 0); // 
-
-    return 0;
+    } while (pilihan != 5);
 }
-
-// Fungsi display menu
-void showMenu(int isAdmin, int isUser) {
-    printf("Menu:\n");
-    printf("1. Lihat Semua Buku\n");
-    printf("2. Pinjam Buku\n");
-    printf("3. Kembalikan Buku\n");
-    if(isAdmin) {
-        printf("4. Tambah Buku\n");
-        printf("5. Hapus Buku\n");
-    }
-    printf("0. Exit\n");
-}
-
