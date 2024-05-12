@@ -5,9 +5,9 @@
 
 void pinjamBuku() {
     FILE *file = fopen("berekstensi.txt", "r");
-    FILE *tempFile = fopen("temp.txt", "w");
+    FILE *pinjamFile = fopen("bukudipinjam.txt", "a");
 
-    if (file == NULL || tempFile == NULL) {
+    if (file == NULL || pinjamFile == NULL) {
         printf("Gagal membuka file.\n");
         return;
     }
@@ -24,30 +24,26 @@ void pinjamBuku() {
             found = 1;
             if (buku.jumlah_tersedia > 0) {
                 buku.jumlah_tersedia--;
+                fprintf(pinjamFile, "%u,%s,%s,%s,%u,%u,%u\n", buku.id, buku.judul, buku.penulis, buku.penerbit, buku.halaman, buku.tahun, buku.jumlah_tersedia);
             } else {
                 printf("Buku dengan ID %u tidak tersedia.\n", id);
                 fclose(file);
-                fclose(tempFile);
-                remove("temp.txt");
+                fclose(pinjamFile);
                 return;
             }
         }
-        fprintf(tempFile, "%u,%s,%s,%s,%u,%u,%u\n", buku.id, buku.judul, buku.penulis, buku.penerbit, buku.halaman, buku.tahun, buku.jumlah_tersedia);
+        fprintf(pinjamFile, "%u,%s,%s,%s,%u,%u,%u\n", buku.id, buku.judul, buku.penulis, buku.penerbit, buku.halaman, buku.tahun, buku.jumlah_tersedia);
     }
 
     if (!found) {
         printf("Buku dengan ID %u tidak ditemukan.\n", id);
         fclose(file);
-        fclose(tempFile);
-        remove("temp.txt");
+        fclose(pinjamFile);
         return;
     }
 
     fclose(file);
-    fclose(tempFile);
-
-    remove("berekstensi.txt");
-    rename("temp.txt", "berekstensi.txt");
+    fclose(pinjamFile);
 
     printf("Buku dengan ID %u berhasil dipinjam.\n", id);
 }
