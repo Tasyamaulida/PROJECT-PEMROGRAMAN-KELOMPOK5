@@ -11,7 +11,7 @@ void listBukuDipinjam() {
     printf("\n\t\t\t=======================================================================================");
     printf("\n\t\t\t\t\t\t       DAFTAR BUKU DIPINJAM       \n");
     printf("\n\t\t\t=======================================================================================\n");
-    printf("Daftar Buku yang andapinjam:\n");
+    printf("Daftar Buku yang anda pinjam:\n");
 
     // Membaca dan menampilkan data buku dari file
     Buku buku;
