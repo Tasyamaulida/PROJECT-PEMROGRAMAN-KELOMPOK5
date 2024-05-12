@@ -32,7 +32,7 @@ void editBuku() {
         } else {
             found = 1;
 
-            // Membaca data buku yang baru dari pengguna
+            // Membaca data buku baru dari pengguna
             printf("Data Buku yang Baru\n");
             printf("Judul: ");
             getchar(); // Membersihkan newline character dari buffer
