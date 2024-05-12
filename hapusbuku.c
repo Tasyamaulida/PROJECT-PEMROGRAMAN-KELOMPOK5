@@ -21,7 +21,7 @@ void hapusBuku() {
         return;
     }
 
-    // Membaca data buku dari file
+    // Membaca data buku dari file berekstensi.txt
     Buku buku;
     int found = 0;
     while (fscanf(file, "%u,%[^,],%[^,],%[^,],%u,%u,%u\n", &buku.id, buku.judul, buku.penulis, buku.penerbit, &buku.halaman, &buku.tahun, &buku.jumlah_tersedia) != EOF) {
