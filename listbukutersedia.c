@@ -2,7 +2,6 @@
 #include <stdio.h>
 
 void listBukuTersedia() {
-    printf("List Buku Tersedia:\n");
 
     // Membuka file database
     FILE *file = fopen("berekstensi.txt", "r");
