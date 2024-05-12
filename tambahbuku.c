@@ -30,7 +30,7 @@ void tambahBuku() {
         printf("Gagal membuka file.\n");
         return;
     }
-    fprintf(file, "%u,%s,%s,%s,%u,%u,%u\n", buku.id, buku.judul, buku.penulis, buku.penerbit, buku.halaman, buku.tahun, buku.jumlah_tersedia);
+    fprintf(file, "| %-7u | %-40s | %-20s | %-15s | %-14u | %-12u | %-26u |\n", buku.id, buku.judul, buku.penulis, buku.penerbit, buku.halaman, buku.tahun, buku.jumlah_tersedia);
     fclose(file);
 
     printf("Buku berhasil ditambahkan.\n");
