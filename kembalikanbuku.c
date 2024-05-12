@@ -44,3 +44,5 @@ void kembalikanBuku(Buku buku[], Buku buku_dipinjam[], int* jumlah_buku_dipinjam
         printf("Buku dengan ID tersebut tidak ditemukan.\n");
     }
 }
+return 0;
+}
