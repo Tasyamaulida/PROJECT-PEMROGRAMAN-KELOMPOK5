@@ -1,10 +1,13 @@
-1122,Dasar-Dasar Teknik Informatika,Made Budi,Erlangga,217,2017,100
-2233,Pengantar Teknologi Informasi,Dr.Ir Setyo Wibowo,Gagas Media,380,2020,50
-3322,Metode Penelitian Teknik Informasi,Dr.Ir Made Agus,Mizan Publishing,480,2016,90
-4455,Komputer Cerdas Untuk Mahasiswa IT,Muklis Butomo,Erlangga,578,2023,80
-5566,Jaringan Komputer Dan Internet,Aiden Laksana,Gramedia,109,2006,25
-7788,Algoritma Dan Pemograman C++,Faras Jannatul,Bentang Pusaka,759,2017,60
-8899,Keamanan Dan Sistem Informasi,Sofia Nurjanna,Penerbit Indie,447,2019,120
-9910,Pemograman Dasar Phyton,Budi Bijaksana,Pustaka Alvabet,791,2012,30
-1010,Big Data Dan Analisa Data,Putri Aisyah,Marjin Kiri,962,2019,75
-1011,Belajar Mudah Data Mining,Irwansyah Saputra,Informatika,572,2023,10
+|---------|----------------------------------------  |--------------------  |--------------------------------|----------------|--------------|--------------------------  |
+| ID BUKU |               JUDUL BUKU                 |        PENULIS       |             PENERBIT           | JUMLAH HALAMAN | TAHUN TERBIT | JUMLAH BUKU YANG TERSEDIA  |
+|---------|----------------------------------------  |--------------------  |--------------------------------|----------------|--------------|--------------------------  |
+| 1       | Atlas Sejarah Dunia                      | Jeremy Black         | Gramedia Pustaka Utama         | 256            | 2005         | 10                         |
+| 2       | The Joy of Missing out                   | Tanya Dalton         | PT Bintang Pustaka             | 264            | 2013         | 10                         |
+| 3       | Laskar Pelangai                          | Andrea Hirata        | PT Bentang Pustaka             | 529            | 2005         | 10                         |
+| 4       | Amba                                     | Laksmi Pamunjak      | Gramedia Pustaka Utama         | 576            | 2014         | 10                         |
+| 5       | Bumi Manusia                             | pramoedya Ananta Toer| Lentera dipantara              | 538            | 2006         | 10                         |
+| 6       | Garis Waktu                              | Fiersa Besari        | Mediakita                      | 2016           | 2008         | 10                         |
+| 7       | Pulang                                   | Tere liye            | Replubika Penerbit             | 400            | 20010        | 10                         |
+| 8       | Sang Pemimpi                             | Andrea Hirata        | PT Bintang Pustaka             | 300            | 20015        | 1                          |
+| 9       | 5 CM                                     | Donny Dhirgantoro    | Grasindo                       | 256            | 2005         | 10                         |
+| 10      | Aruna dan Lidahnya                       | Laksmi Pamuntjak     | Grasindo                       | 382            | 2005         | 10                         |
