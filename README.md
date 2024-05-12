@@ -1,4 +1,5 @@
 Selamat Datang di Program Perpustakaan Kelompok 5
+Sebelum memakai program tersebut. Harap membaca petunjuk pemakaian pada README.md
 
 Cara run program tersebut dapat dirun dengan:
 gcc header.h main.c editbuku.c hapusbuku.c kembalikanbuku.c listbukudipinjam.c listbukutersedia.c menuadmin.c menuuser.c pinjambuku.c tambahbuku.c -o program
