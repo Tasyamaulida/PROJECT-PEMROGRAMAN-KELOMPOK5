@@ -6,7 +6,7 @@ void kembalikanBuku(Buku buku[], Buku buku_dipinjam[], int* jumlah_buku_dipinjam
     printf("Masukkan ID buku yang akan dikembalikan: ");
     scanf("%d", &bookId);
 
-    // Cari buku berdasarkan ID
+    // Mencari buku berdasarkan ID 
     int i;
     int index = -1;
     for (i = 0; i < *jumlah_buku_dipinjam; i++) {
