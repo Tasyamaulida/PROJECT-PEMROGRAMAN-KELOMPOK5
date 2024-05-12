@@ -3,28 +3,29 @@
 
 void listBukuDipinjam() {
     // Membuka file database
-    FILE *file = fopen("berekstensi.txt", "r");
+    FILE *file = fopen("bukudipinjam.txt", "r");
     if (file == NULL) {
         printf("Gagal membuka file.\n");
         return;
     }
+    printf("\n\t\t\t=======================================================================================");
+    printf("\n\t\t\t\t\t\t       DAFTAR BUKU DIPINJAM       \n");
+    printf("\n\t\t\t=======================================================================================\n");
+    printf("Daftar Buku yang andapinjam:\n");
 
-    // Membaca data buku dari file
+    // Membaca dan menampilkan data buku dari file
     Buku buku;
-    int counter = 0;
-    printf("Daftar Buku yang Dipinjam:\n");
-    printf("ID\tJudul\t\t\tPengarang\t\tTahun Terbit\n");
-
-    while (fscanf(file, "%u,%[^,],%[^,],%[^,],%u,%u,%u\n", &buku.id, buku.judul, buku.penulis, buku.penerbit, &buku.halaman, &buku.tahun, &buku.jumlah_tersedia) != EOF) {
-        if (buku.jumlah_tersedia == 0) {
-            printf("%u\t%-40s\t%-40s\t%u\n", buku.id, buku.judul, buku.penulis, buku.tahun);
-            counter++;
+    while (fscanf(file, "%u,%[^,],%[^,],%[^,],%u,%u,%u\n", &buku.id, buku.judul, buku.penulis, buku.penerbit, &buku.halaman, &buku.tahun, &buku.jumlah_tersedia) == 7) {
+        if (buku.jumlah_tersedia > 0) {
+            printf("ID: %u\n", buku.id);
+            printf("Judul: %s\n", buku.judul);
+            printf("Penulis: %s\n", buku.penulis);
+            printf("Penerbit: %s\n", buku.penerbit);
+            printf("Jumlah Halaman: %u\n", buku.halaman);
+            printf("Tahun Terbit: %u\n", buku.tahun);
+            printf("\n");
         }
     }
 
     fclose(file);
-
-    if (counter == 0) {
-        printf("Tidak ada buku yang dipinjam.\n");
-    }
 }
