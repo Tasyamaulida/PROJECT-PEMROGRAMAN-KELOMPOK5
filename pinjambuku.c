@@ -4,6 +4,7 @@
 #include "header.h"
 
 void pinjamBuku() {
+    //membuka file database
     FILE *file = fopen("berekstensi.txt", "r");
     FILE *pinjamFile = fopen("bukudipinjam.txt", "a");
 
