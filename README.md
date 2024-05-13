@@ -1,6 +1,6 @@
 Selamat Datang di Program Perpustakaan Kelompok 5, yang anggotanya terdiri dari:
 1. Yulli Erisna 2308107010015
-2. Dwi Fitria Windi 2308107010017
+2. Dwi Fitria Windy 2308107010017
 3. Muhammad Aidil Fitrah 2308107010035
 4. Muhammad Hanif 2308107010043
 5. Tasya Maulida 2308107010079
