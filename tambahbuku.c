@@ -25,7 +25,7 @@ void tambahBuku() {
     scanf("%u", &buku.jumlah_tersedia);
 
     // Menyimpan data buku ke dalam file
-    FILE *file = fopen("berekstensi.txt", "a");
+    FILE *file = fopen("berekstensi.txt", "a\n");
     if (file == NULL) {
         printf("Gagal membuka file.\n");
         return;
