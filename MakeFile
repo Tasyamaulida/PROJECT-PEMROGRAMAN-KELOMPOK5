@@ -1,0 +1,2 @@
+Run : 
+	gcc header.h main.c editbuku.c hapusbuku.c kembalikanbuku.c listbukudipinjam.c listbukutersedia.c menuadmin.c menuuser.c pinjambuku.c tambahbuku.c -o program
