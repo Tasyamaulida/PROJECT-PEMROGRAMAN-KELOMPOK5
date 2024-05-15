@@ -1,50 +1,51 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "header.h"
 
 void pinjamBuku() {
-    //membuka file database
-    FILE *file = fopen("berekstensi.txt", "r");
-    FILE *pinjamFile = fopen("bukudipinjam.txt", "a");
+    // Meminta input ID buku yang akan dipinjam
+    unsigned int id;
+    printf("Masukkan ID buku yang akan dipinjam: ");
+    scanf("%u", &id);
 
-    if (file == NULL || pinjamFile == NULL) {
+    // Membuka file database
+    FILE *file = fopen("berekstensi.txt", "r+");
+    if (file == NULL) {
         printf("Gagal membuka file.\n");
         return;
     }
 
-    unsigned int id;
-    printf("Masukkan ID buku yang ingin dipinjam: ");
-    scanf("%u", &id);
-
+    // Membaca dan mencari buku dengan ID yang sesuai
     Buku buku;
-    int found = 0;
+    int bukuDitemukan = 0;
+    long int posisiBuku = -1;
+    while (fscanf(file, "%u,%[^,],%[^,],%[^,],%u,%u,%u\n", &buku.id, buku.judul, buku.penulis, buku.penerbit, &buku.halaman, &buku.tahun, &buku.jumlah_tersedia) == 7) {
+        if (buku.id == id && buku.jumlah_tersedia > 0) {
+            bukuDitemukan = 1;
+            posisiBuku = ftell(file) - strlen(buku.judul) - strlen(buku.penulis) - strlen(buku.penerbit) - 22; // Menghitung posisi buku dalam file
 
-    while (fscanf(file, "%u,%[^,],%[^,],%[^,],%u,%u,%u\n", &buku.id, buku.judul, buku.penulis, buku.penerbit, &buku.halaman, &buku.tahun, &buku.jumlah_tersedia) != EOF) {
-        if (buku.id == id) {
-            found = 1;
-            if (buku.jumlah_tersedia > 0) {
-                buku.jumlah_tersedia--;
-                fprintf(pinjamFile, "%u,%s,%s,%s,%u,%u,%u\n", buku.id, buku.judul, buku.penulis, buku.penerbit, buku.halaman, buku.tahun, buku.jumlah_tersedia);
-            } else {
-                printf("Buku dengan ID %u tidak tersedia.\n", id);
-                fclose(file);
-                fclose(pinjamFile);
+            // Mengurangi jumlah tersedia dan menulis kembali data buku
+            fseek(file, posisiBuku, SEEK_SET);
+            buku.jumlah_tersedia--;
+            fprintf(file, "%u,%s,%s,%s,%u,%u,%u\n", buku.id, buku.judul, buku.penulis, buku.penerbit, buku.halaman, buku.tahun, buku.jumlah_tersedia);
+            printf("Buku dengan ID %u berhasil dipinjam.\n", buku.id);
+
+            // Menambahkan buku ke daftar buku yang dipinjam
+            FILE *pinjamFile = fopen("bukudipinjam.txt", "a");
+            if (pinjamFile == NULL) {
+                printf("Gagal membuka file.\n");
                 return;
             }
+            fprintf(pinjamFile, "%u,%s,%s,%s,%u,%u,%u\n", buku.id, buku.judul, buku.penulis, buku.penerbit, buku.halaman, buku.tahun, buku.jumlah_tersedia);
+            fclose(pinjamFile);
+            break;
         }
-        fprintf(pinjamFile, "%u,%s,%s,%s,%u,%u,%u\n", buku.id, buku.judul, buku.penulis, buku.penerbit, buku.halaman, buku.tahun, buku.jumlah_tersedia);
     }
 
-    if (!found) {
-        printf("Buku dengan ID %u tidak ditemukan.\n", id);
-        fclose(file);
-        fclose(pinjamFile);
-        return;
+    // Jika buku tidak ditemukan atau tidak tersedia
+    if (!bukuDitemukan) {
+        printf("Buku tidak ditemukan atau tidak tersedia.\n");
     }
 
     fclose(file);
-    fclose(pinjamFile);
-
-    printf("Buku dengan ID %u berhasil dipinjam.\n", id);
 }
